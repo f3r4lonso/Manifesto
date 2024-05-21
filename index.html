@@ -25,52 +25,46 @@
       margin: 0;
       padding: 0;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
       height: 100vh;
-      overflow: hidden; /* Evitar scroll cuando el popup está abierto */
-      flex-direction: column;
-    }
-    .container {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      width: 90%;
-      max-width: 400px;
-      border-radius: 15px; /* Bordes más redondeados */
-      padding: 20px;
-      box-shadow: 0 4px 8px rgba(192, 192, 192, 0.2), 0 6px 20px rgba(192, 192, 192, 0.19); /* Sombra plateada */
-      background-color: rgba(0, 0, 0, 0.8); /* Fondo negro semi-transparente */
-      backdrop-filter: blur(10px); /* Filtro de desenfoque para el fondo */
+      overflow-x: hidden; /* Evitar scroll horizontal */
     }
     .logo {
       max-width: 70px; /* Tamaño máximo del logo */
-      margin-bottom: 10px;
+      margin-top: 20px;
     }
     .product-name {
       font-family: 'GraciaRough';
-      font-size: 2.5em; /* Tamaño de fuente ajustado para dispositivos móviles */
-      margin-bottom: 10px;
+      font-size: 2em; /* Tamaño de fuente ajustado para dispositivos móviles */
+      margin: 10px 0;
       line-height: 1.2;
       text-align: center;
       color: #c0c0c0; /* Color plateado */
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra de texto */
     }
+    .image {
+      display: block;
+      max-width: 80%; /* Ajustar el ancho de la imagen para móviles */
+      height: auto;
+      border-radius: 15px; /* Bordes redondeados */
+      box-shadow: 0 4px 8px rgba(192, 192, 192, 0.2), 0 6px 20px rgba(192, 192, 192, 0.19); /* Sombra plateada */
+      margin-bottom: 20px;
+    }
     .menu {
       display: grid;
       grid-template-columns: repeat(2, 1fr); /* Dos columnas */
       gap: 10px; /* Espacio entre los botones */
-      width: 100%;
+      width: 90%;
       max-width: 400px;
-      margin: 20px 0;
+      margin-bottom: 20px;
     }
     .menu div,
     .menu button {
       cursor: pointer;
       padding: 10px; /* Ajustar padding para el tamaño del botón */
       font-family: 'CalistBold', Monaco, monospace;
-      font-size: 1em; /* Ajustar tamaño de fuente para el botón */
+      font-size: 0.9em; /* Ajustar tamaño de fuente para el botón */
       text-align: center; /* Centrar el texto */
       border-radius: 10px; /* Bordes redondeados */
       box-sizing: border-box; /* Asegurar que el padding esté incluido en el tamaño del botón */
@@ -91,9 +85,10 @@
     }
     .section-content {
       display: none;
-      padding: 10px 20px; /* Ajustar padding para reducir margen superior */
+      padding: 10px; /* Ajustar padding para reducir margen superior */
       text-align: center; /* Centrar el texto */
-      width: 100%;
+      width: 90%;
+      max-width: 400px;
       background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco semi-transparente */
       color: #000000; /* Texto negro */
       border-radius: 15px; /* Bordes redondeados */
@@ -105,6 +100,7 @@
       display: flex;
       flex-direction: column;
       justify-content: center; /* Centrar verticalmente */
+      margin-bottom: 20px; /* Espacio entre el contenido y el siguiente elemento */
     }
     .section-content p {
       margin: 5px 0; /* Reducir margen superior e inferior de los párrafos */
@@ -112,14 +108,6 @@
     }
     .section-content.active {
       display: flex;
-    }
-    .image {
-      display: block;
-      margin: 0 auto 20px auto;
-      max-width: 100%;
-      height: auto;
-      border-radius: 15px; /* Bordes redondeados */
-      box-shadow: 0 4px 8px rgba(192, 192, 192, 0.2), 0 6px 20px rgba(192, 192, 192, 0.19); /* Sombra plateada */
     }
     .popup-overlay {
       display: none; /* Oculto por defecto */
@@ -174,15 +162,6 @@
     .popup button.cancel {
       background-color: #ff0000; /* Rojo para el botón de cancelar */
     }
-    @media (max-width: 600px) {
-      .product-name {
-        font-size: 2em;
-      }
-      .menu div,
-      .menu button {
-        font-size: 0.9em; /* Ajustar tamaño de fuente para pantallas pequeñas */
-      }
-    }
   </style>
   <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
   <script>
@@ -232,49 +211,47 @@
   </script>
 </head>
 <body>
-  <div class="container">
-    <img class="logo" src="logo/logo.jpeg" alt="Logo de la marca">
-    <div class="product-name">Skirt With Secrets</div>
-    <img class="image" src="images/skirt.gif" alt="Foto del item">
-    <div class="menu">
-      <div onclick="showSection('info1')" id="menu1" class="active">Product code</div>
-      <div onclick="showSection('info2')" id="menu2">Materials</div>
-      <div onclick="showSection('info3')" id="menu3">Care instructions</div>
-      <div onclick="showSection('info4')" id="menu4">Product journey</div>
-      <div onclick="showSection('info5')" id="menu5">Digital Collectibles</div>
-      <button class="contact-button" onclick="toggleContactForm()">Contact Me</button>
-    </div>
-    <div class="section-content" id="info1">
-      <p>M-0001010</p>
-      <p>Uploaded on the blockchain: 21/03/2024</p>
-      <p>Blockchain transaction ID:</p>
-      <p class="right-align">44e25bc0ed840f9bf0e58d6227db15192d5b89e79ba4304da16b09703f68ceaf</p>
-    </div>
-    <div class="section-content" id="info2">
-      <p>Fabric: 80% Ahimsa Silk, 20% Polyester.</p>
-      <p>Lining: 100% Ahimsa Silk.</p>
-    </div>
-    <div class="section-content" id="info3">
-      <p>Do Not Wash</p>
-      <p>Do Not Bleach</p>
-      <p>Iron Max 110ºC</p>
-      <p>Do Not Tumble Dry</p>
-      <p>Dry Clean with Tetracloroethylene</p>
-    </div>
-    <div class="section-content" id="info4">
-      <p>Step 1. Origin of textiles</p>
-      <p>Step 2. Textile Interventions</p>
-      <p>Step 3. Tailoring</p>
-      <p>Step 4. Quality control</p>
-      <p>Step 5. Labeling and packaging</p>
-    </div>
-    <div class="section-content" id="info5">
-      <p>Authenticity</p>
-      <p>Transparency</p>
-      <p>Waste Management</p>
-      <p>Community Building</p>
-      <p>Resale & Transfer of Ownership</p>
-    </div>
+  <img class="logo" src="logo/logo.jpeg" alt="Logo de la marca">
+  <div class="product-name">Skirt With Secrets</div>
+  <img class="image" src="images/skirt.gif" alt="Foto del item">
+  <div class="menu">
+    <div onclick="showSection('info1')" id="menu1" class="active">Product code</div>
+    <div onclick="showSection('info2')" id="menu2">Materials</div>
+    <div onclick="showSection('info3')" id="menu3">Care instructions</div>
+    <div onclick="showSection('info4')" id="menu4">Product journey</div>
+    <div onclick="showSection('info5')" id="menu5">Digital Collectibles</div>
+    <button class="contact-button" onclick="toggleContactForm()">Contact Me</button>
+  </div>
+  <div class="section-content" id="info1">
+    <p>M-0001010</p>
+    <p>Uploaded on the blockchain: 21/03/2024</p>
+    <p>Blockchain transaction ID:</p>
+    <p class="right-align">44e25bc0ed840f9bf0e58d6227db15192d5b89e79ba4304da16b09703f68ceaf</p>
+  </div>
+  <div class="section-content" id="info2">
+    <p>Fabric: 80% Ahimsa Silk, 20% Polyester.</p>
+    <p>Lining: 100% Ahimsa Silk.</p>
+  </div>
+  <div class="section-content" id="info3">
+    <p>Do Not Wash</p>
+    <p>Do Not Bleach</p>
+    <p>Iron Max 110ºC</p>
+    <p>Do Not Tumble Dry</p>
+    <p>Dry Clean with Tetracloroethylene</p>
+  </div>
+  <div class="section-content" id="info4">
+    <p>Step 1. Origin of textiles</p>
+    <p>Step 2. Textile Interventions</p>
+    <p>Step 3. Tailoring</p>
+    <p>Step 4. Quality control</p>
+    <p>Step 5. Labeling and packaging</p>
+  </div>
+  <div class="section-content" id="info5">
+    <p>Authenticity</p>
+    <p>Transparency</p>
+    <p>Waste Management</p>
+    <p>Community Building</p>
+    <p>Resale & Transfer of Ownership</p>
   </div>
 
   <div id="popup-overlay" class="popup-overlay">
