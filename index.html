@@ -20,8 +20,8 @@
 
     body {
       font-family: 'CalistRegular', 'Courier New', Courier, monospace;
-      background-color: #ffffff;
-      color: #000000;
+      background-color: #000000; /* Fondo negro */
+      color: #ffffff; /* Texto blanco */
       margin: 0;
       padding: 0;
       display: flex;
@@ -30,48 +30,64 @@
       height: 100vh;
     }
     .container {
-      margin-top: 20px; /* Margen superior añadido */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       width: 90%;
       max-width: 400px;
-      border: 2px solid #000000;
       border-radius: 10px;
       padding: 20px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      text-align: center;
+      box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1); /* Sombra blanca tenue */
+      background-color: #000000; /* Fondo negro */
+      margin-top: 50px; /* Incrementar el margen superior */
     }
     .product-name {
       font-family: 'GraciaRough';
       font-size: 4em; /* Tamaño de fuente aumentado */
       margin-bottom: 10px;
+      line-height: 1.2;
+      text-align: center;
     }
-    .section {
-      border-bottom: 1px solid #000000;
+    .menu {
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+      max-width: 400px;
+      margin: 20px 0;
+    }
+    .menu div {
       cursor: pointer;
-      padding: 10px 0;
-      text-align: left;
-    }
-    .section h2 {
-      margin: 0;
+      padding: 10px;
       font-family: 'CalistBold', Monaco, monospace;
       font-size: 1.2em;
+      color: #ffffff;
     }
-    .hidden-info {
+    .menu div.active {
+      border-bottom: 2px solid #ffffff;
+    }
+    .section-content {
       display: none;
-      padding: 10px 0;
+      padding: 20px 0;
+      text-align: left;
+      width: 100%;
     }
-    .section:last-child {
-      border-bottom: none;
-    }
-    .right-align {
-      text-align: right;
-      max-width: calc(100% - 40px);
-      word-break: break-all;
+    .section-content.active {
+      display: block;
     }
     .image {
       display: block;
-      margin: 0 auto;
-      max-width: 80%;
+      margin: 0 auto 20px auto;
+      max-width: 100%;
       height: auto;
+    }
+    @media (max-width: 600px) {
+      .product-name {
+        font-size: 2.5em;
+      }
+      .menu div {
+        font-size: 1em;
+      }
     }
   </style>
 </head>
@@ -79,70 +95,56 @@
   <div class="container">
     <div class="product-name">Skirt With Secrets</div>
     <img class="image" src="images/skirt.gif" alt="Foto del item">
-    <div class="section" onclick="toggleInfo('info1')">
-      <h2>Item</h2>
-      <div id="info1" class="hidden-info">
-        <p>Wear elegance without compromise privacy.</p>
-        <p>Crafted with artisan techniques and luxurious sustainable materials: Ahimsa silk and recycled polyester.</p>
-        <p>Cleverly hidden 10x10cm interior pocket.</p>
-      </div>
+    <div class="menu">
+      <div onclick="showSection('info1')" id="menu1" class="active">Product code</div>
+      <div onclick="showSection('info2')" id="menu2">Materials</div>
+      <div onclick="showSection('info3')" id="menu3">Care instructions</div>
+      <div onclick="showSection('info4')" id="menu4">Product journey</div>
+      <div onclick="showSection('info5')" id="menu5">Digital Collectibles</div>
     </div>
-    <div class="section" onclick="toggleInfo('info2')">
-      <h2>Product code</h2>
-      <div id="info2" class="hidden-info">
-        <p>M-0001010</p>
-        <p>Uploaded on the blockchain: 21/03/2024</p>
-        <p>Blockchain transaction ID:</p>
-        <p class="right-align">44e25bc0ed840f9bf0e58d6227db1519 2d5b89e79ba4304da16b09703f68ceaf</p>
-      </div>
+    <div class="section-content active" id="info1">
+      <p>M-0001010</p>
+      <p>Uploaded on the blockchain: 21/03/2024</p>
+      <p>Blockchain transaction ID:</p>
+      <p class="right-align">44e25bc0ed840f9bf0e58d6227db15192d5b89e79ba4304da16b09703f68ceaf</p>
     </div>
-    <div class="section" onclick="toggleInfo('info3')">
-      <h2>Materials</h2>
-      <div id="info3" class="hidden-info">
-        <p>Fabric: 80% Ahimsa Silk, 20% Polyester.</p>
-        <p>Lining: 100% Ahimsa Silk.</p>
-      </div>
+    <div class="section-content" id="info2">
+      <p>Fabric: 80% Ahimsa Silk, 20% Polyester.</p>
+      <p>Lining: 100% Ahimsa Silk.</p>
     </div>
-    <div class="section" onclick="toggleInfo('info4')">
-      <h2>Care instructions</h2>
-      <div id="info4" class="hidden-info">
-        <p>Do Not Wash</p>
-        <p>Do Not Bleach</p>
-        <p>Iron Max 110ºC</p>
-        <p>Do Not Tumble Dry</p>
-        <p>Dry Clean with Tetracloroethylene</p>
-      </div>
+    <div class="section-content" id="info3">
+      <p>Do Not Wash</p>
+      <p>Do Not Bleach</p>
+      <p>Iron Max 110ºC</p>
+      <p>Do Not Tumble Dry</p>
+      <p>Dry Clean with Tetracloroethylene</p>
     </div>
-    <div class="section" onclick="toggleInfo('info5')">
-      <h2>Skirt's journey</h2>
-      <div id="info5" class="hidden-info">
-        <p>Step 1. Origin of textiles</p>
-        <p>Step 2. Textile Interventions</p>
-        <p>Step 3. Tailoring</p>
-        <p>Step 4. Quality control</p>
-        <p>Step 5. Labeling and packaging</p>
-      </div>
+    <div class="section-content" id="info4">
+      <p>Step 1. Origin of textiles</p>
+      <p>Step 2. Textile Interventions</p>
+      <p>Step 3. Tailoring</p>
+      <p>Step 4. Quality control</p>
+      <p>Step 5. Labeling and packaging</p>
     </div>
-    <div class="section" onclick="toggleInfo('info6')">
-      <h2>Why do I need a Blockchain Passport?</h2>
-      <div id="info6" class="hidden-info">
-        <p>Authenticity</p>
-        <p>Transparency</p>
-        <p>Waste Management</p>
-        <p>Community Building</p>
-        <p>Resale & Transfer of Ownership</p>
-      </div>
+    <div class="section-content" id="info5">
+      <p>Authenticity</p>
+      <p>Transparency</p>
+      <p>Waste Management</p>
+      <p>Community Building</p>
+      <p>Resale & Transfer of Ownership</p>
     </div>
   </div>
   <script>
-  function toggleInfo(id) {
-    var info = document.getElementById(id);
-    if (info.style.display === "none" || info.style.display === "") {
-      info.style.display = "block";
-    } else {
-      info.style.display = "none";
+    function showSection(id) {
+      var sections = document.getElementsByClassName('section-content');
+      var menus = document.getElementsByClassName('menu')[0].getElementsByTagName('div');
+      for (var i = 0; i < sections.length; i++) {
+        sections[i].classList.remove('active');
+        menus[i].classList.remove('active');
+      }
+      document.getElementById(id).classList.add('active');
+      document.getElementById('menu' + id.replace('info', '')).classList.add('active');
     }
-  }
   </script>
 </body>
 </html>
