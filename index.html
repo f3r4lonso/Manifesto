@@ -20,7 +20,7 @@
 
     body {
       font-family: 'CalistRegular', 'Courier New', Courier, monospace;
-      background-color: #000000; /* Fondo negro */
+      background: linear-gradient(180deg, #000000, #333333, #ffffff); /* Fondo degradado de negro a blanco */
       color: #ffffff; /* Texto blanco */
       margin: 0;
       padding: 0;
@@ -29,6 +29,7 @@
       align-items: center;
       height: 100vh;
       overflow: hidden; /* Evitar scroll cuando el popup está abierto */
+      flex-direction: column;
     }
     .container {
       display: flex;
@@ -37,10 +38,11 @@
       align-items: center;
       width: 90%;
       max-width: 400px;
-      border-radius: 10px;
+      border-radius: 15px; /* Bordes más redondeados */
       padding: 20px;
-      box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1); /* Sombra blanca tenue */
-      background-color: #000000; /* Fondo negro */
+      box-shadow: 0 4px 8px rgba(192, 192, 192, 0.2), 0 6px 20px rgba(192, 192, 192, 0.19); /* Sombra plateada */
+      background-color: rgba(0, 0, 0, 0.8); /* Fondo negro semi-transparente */
+      backdrop-filter: blur(10px); /* Filtro de desenfoque para el fondo */
     }
     .logo {
       max-width: 70px; /* Tamaño máximo del logo */
@@ -48,43 +50,58 @@
     }
     .product-name {
       font-family: 'GraciaRough';
-      font-size: 4em; /* Tamaño de fuente aumentado */
+      font-size: 2.5em; /* Tamaño de fuente ajustado para dispositivos móviles */
       margin-bottom: 10px;
       line-height: 1.2;
       text-align: center;
+      color: #c0c0c0; /* Color plateado */
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra de texto */
     }
     .menu {
-      display: flex;
-      justify-content: space-around;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); /* Dos columnas */
+      gap: 10px; /* Espacio entre los botones */
       width: 100%;
       max-width: 400px;
       margin: 20px 0;
-      transform: translateX(-10px); /* Mover menú 10px hacia la izquierda */
     }
-    .menu div {
+    .menu div,
+    .menu button {
       cursor: pointer;
-      padding: 0px 8px; /* Ajustar padding para el tamaño del botón */
+      padding: 10px; /* Ajustar padding para el tamaño del botón */
       font-family: 'CalistBold', Monaco, monospace;
       font-size: 1em; /* Ajustar tamaño de fuente para el botón */
-      color: #ffffff;
       text-align: center; /* Centrar el texto */
-      flex: 1; /* Asegurar que los botones ocupen el mismo espacio */
+      border-radius: 10px; /* Bordes redondeados */
+      box-sizing: border-box; /* Asegurar que el padding esté incluido en el tamaño del botón */
+      border: 2px solid #c0c0c0; /* Borde plateado */
+      background: linear-gradient(145deg, #000000, #333333); /* Fondo degradado negro a gris */
+      color: #ffffff;
+      transition: all 0.3s ease; /* Transición suave para el hover */
+    }
+    .menu div:hover,
+    .menu button:hover {
+      background: #c0c0c0; /* Fondo plateado al pasar el mouse */
+      color: #000000; /* Texto negro al pasar el mouse */
+      box-shadow: 0 4px 8px rgba(192, 192, 192, 0.5); /* Sombra plateada al pasar el mouse */
     }
     .menu div.active {
-      border-bottom: 2px solid #ffffff;
+      background: #c0c0c0; /* Fondo plateado para el activo */
+      color: #000000; /* Texto negro para el activo */
     }
     .section-content {
       display: none;
       padding: 10px 20px; /* Ajustar padding para reducir margen superior */
       text-align: center; /* Centrar el texto */
       width: 100%;
-      background-color: #ffffff; /* Fondo blanco */
+      background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco semi-transparente */
       color: #000000; /* Texto negro */
-      border-radius: 10px; /* Bordes redondeados */
+      border-radius: 15px; /* Bordes redondeados */
       box-sizing: border-box; /* Incluir padding en el tamaño del contenedor */
-      height: 160px; /* Altura fija */
+      height: auto; /* Altura automática */
       overflow-wrap: break-word; /* Ajustar texto al contenedor */
       overflow: hidden; /* Evitar desbordamiento */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
     }
     .section-content p {
       margin: 5px 0; /* Reducir margen superior e inferior de los párrafos */
@@ -98,16 +115,8 @@
       margin: 0 auto 20px auto;
       max-width: 100%;
       height: auto;
-    }
-    .contact-button {
-      background-color: #ffffff;
-      color: #000000;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 1em;
-      margin-top: 20px;
+      border-radius: 15px; /* Bordes redondeados */
+      box-shadow: 0 4px 8px rgba(192, 192, 192, 0.2), 0 6px 20px rgba(192, 192, 192, 0.19); /* Sombra plateada */
     }
     .popup-overlay {
       display: none; /* Oculto por defecto */
@@ -122,10 +131,10 @@
       z-index: 1000;
     }
     .popup {
-      background-color: #ffffff;
+      background-color: rgba(255, 255, 255, 0.9);
       color: #000000;
       padding: 20px;
-      border-radius: 10px;
+      border-radius: 15px;
       box-sizing: border-box;
       width: 90%;
       max-width: 400px;
@@ -134,6 +143,7 @@
       justify-content: center;
       align-items: center;
       position: relative;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
     }
     .popup input, .popup textarea {
       margin-bottom: 10px;
@@ -152,19 +162,22 @@
       cursor: pointer;
       font-size: 1em;
       margin: 5px;
+      transition: all 0.3s ease; /* Transición suave para el hover */
+    }
+    .popup button:hover {
+      background-color: #c0c0c0; /* Fondo plateado al pasar el mouse */
+      color: #000000; /* Texto negro al pasar el mouse */
     }
     .popup button.cancel {
       background-color: #ff0000; /* Rojo para el botón de cancelar */
     }
     @media (max-width: 600px) {
       .product-name {
-        font-size: 2.5em;
+        font-size: 2em;
       }
-      .menu div {
-        font-size: 0.8em; /* Ajustar tamaño de fuente para pantallas pequeñas */
-      }
-      .section-content {
-        height: 140px; /* Altura fija para pantallas pequeñas */
+      .menu div,
+      .menu button {
+        font-size: 0.9em; /* Ajustar tamaño de fuente para pantallas pequeñas */
       }
     }
   </style>
@@ -220,6 +233,7 @@
       <div onclick="showSection('info3')" id="menu3">Care instructions</div>
       <div onclick="showSection('info4')" id="menu4">Product journey</div>
       <div onclick="showSection('info5')" id="menu5">Digital Collectibles</div>
+      <button class="contact-button" onclick="toggleContactForm()">Contact Me</button>
     </div>
     <div class="section-content active" id="info1">
       <p>M-0001010</p>
@@ -252,7 +266,6 @@
       <p>Community Building</p>
       <p>Resale & Transfer of Ownership</p>
     </div>
-    <button class="contact-button" onclick="toggleContactForm()">Contact Me</button>
   </div>
 
   <div id="popup-overlay" class="popup-overlay">
