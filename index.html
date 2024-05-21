@@ -5,8 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Página Móvil</title>
   <style>
+    @font-face {
+      font-family: 'CalistRegular';
+      src: url('fonts/CALIST.TTF') format('truetype');
+    }
+    @font-face {
+      font-family: 'CalistBold';
+      src: url('fonts/CALISTB.TTF') format('truetype');
+    }
+
     body {
-      font-family: 'Courier New', Courier, monospace;
+      font-family: 'CalistRegular', 'Courier New', Courier, monospace;
       background-color: #ffffff;
       color: #000000;
       margin: 0;
@@ -31,7 +40,7 @@
     }
     .section h2 {
       margin: 0;
-      font-family: Monaco, monospace;
+      font-family: 'CalistBold', Monaco, monospace;
       font-size: 1.2em;
     }
     .hidden-info {
