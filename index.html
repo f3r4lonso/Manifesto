@@ -27,17 +27,17 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      height: 100vh;
-      overflow-x: hidden; /* Evitar scroll horizontal */
+      min-height: 100vh;
+      overflow-y: auto; /* Habilitar scroll vertical */
     }
     .logo {
       max-width: 70px; /* Tamaño máximo del logo */
-      margin-top: 20px;
+      margin: 10px 0; /* Reducir espacio entre el logo y el nombre del producto */
     }
     .product-name {
       font-family: 'GraciaRough';
       font-size: 2em; /* Tamaño de fuente ajustado para dispositivos móviles */
-      margin: 10px 0;
+      margin: 5px 0; /* Reducir espacio entre el logo y el nombre del producto */
       line-height: 1.2;
       text-align: center;
       color: #c0c0c0; /* Color plateado */
@@ -45,7 +45,7 @@
     }
     .image {
       display: block;
-      max-width: 80%; /* Ajustar el ancho de la imagen para móviles */
+      max-width: 100%; /* Ajustar el ancho de la imagen para móviles */
       height: auto;
       border-radius: 15px; /* Bordes redondeados */
       box-shadow: 0 4px 8px rgba(192, 192, 192, 0.2), 0 6px 20px rgba(192, 192, 192, 0.19); /* Sombra plateada */
@@ -64,7 +64,7 @@
       cursor: pointer;
       padding: 10px; /* Ajustar padding para el tamaño del botón */
       font-family: 'CalistBold', Monaco, monospace;
-      font-size: 0.9em; /* Ajustar tamaño de fuente para el botón */
+      font-size: 1em; /* Ajustar tamaño de fuente para el botón */
       text-align: center; /* Centrar el texto */
       border-radius: 10px; /* Bordes redondeados */
       box-sizing: border-box; /* Asegurar que el padding esté incluido en el tamaño del botón */
@@ -85,7 +85,7 @@
     }
     .section-content {
       display: none;
-      padding: 10px; /* Ajustar padding para reducir margen superior */
+      padding: 10px 20px; /* Ajustar padding para reducir margen superior */
       text-align: center; /* Centrar el texto */
       width: 90%;
       max-width: 400px;
