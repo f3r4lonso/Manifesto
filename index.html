@@ -26,8 +26,9 @@
       padding: 0;
       display: flex;
       justify-content: center;
-      align-items: flex-start;
+      align-items: center;
       height: 100vh;
+      overflow: hidden; /* Evitar scroll cuando el popup está abierto */
     }
     .container {
       display: flex;
@@ -40,7 +41,6 @@
       padding: 20px;
       box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1); /* Sombra blanca tenue */
       background-color: #000000; /* Fondo negro */
-      margin-top: 50px; /* Incrementar el margen superior */
     }
     .product-name {
       font-family: 'GraciaRough';
@@ -55,22 +55,36 @@
       width: 100%;
       max-width: 400px;
       margin: 20px 0;
+      transform: translateX(-10px); /* Mover menú 10px hacia la izquierda */
     }
     .menu div {
       cursor: pointer;
-      padding: 10px;
+      padding: 0px 8px; /* Ajustar padding para el tamaño del botón */
       font-family: 'CalistBold', Monaco, monospace;
-      font-size: 1.2em;
+      font-size: 1em; /* Ajustar tamaño de fuente para el botón */
       color: #ffffff;
+      text-align: center; /* Centrar el texto */
+      flex: 1; /* Asegurar que los botones ocupen el mismo espacio */
     }
     .menu div.active {
       border-bottom: 2px solid #ffffff;
     }
     .section-content {
       display: none;
-      padding: 20px 0;
-      text-align: left;
+      padding: 10px 20px; /* Ajustar padding para reducir margen superior */
+      text-align: center; /* Centrar el texto */
       width: 100%;
+      background-color: #ffffff; /* Fondo blanco */
+      color: #000000; /* Texto negro */
+      border-radius: 10px; /* Bordes redondeados */
+      box-sizing: border-box; /* Incluir padding en el tamaño del contenedor */
+      height: 160px; /* Altura fija */
+      overflow-wrap: break-word; /* Ajustar texto al contenedor */
+      overflow: hidden; /* Evitar desbordamiento */
+    }
+    .section-content p {
+      margin: 5px 0; /* Reducir margen superior e inferior de los párrafos */
+      line-height: 1.2; /* Reducir distancia entre líneas */
     }
     .section-content.active {
       display: block;
@@ -81,15 +95,115 @@
       max-width: 100%;
       height: auto;
     }
+    .contact-button {
+      background-color: #ffffff;
+      color: #000000;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+      margin-top: 20px;
+    }
+    .popup-overlay {
+      display: none; /* Oculto por defecto */
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro semi-transparente */
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .popup {
+      background-color: #ffffff;
+      color: #000000;
+      padding: 20px;
+      border-radius: 10px;
+      box-sizing: border-box;
+      width: 90%;
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+    .popup input, .popup textarea {
+      margin-bottom: 10px;
+      padding: 10px;
+      border: 1px solid #000000;
+      border-radius: 5px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .popup button {
+      background-color: #000000;
+      color: #ffffff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+      margin: 5px;
+    }
+    .popup button.cancel {
+      background-color: #ff0000; /* Rojo para el botón de cancelar */
+    }
     @media (max-width: 600px) {
       .product-name {
         font-size: 2.5em;
       }
       .menu div {
-        font-size: 1em;
+        font-size: 0.8em; /* Ajustar tamaño de fuente para pantallas pequeñas */
+      }
+      .section-content {
+        height: 140px; /* Altura fija para pantallas pequeñas */
       }
     }
   </style>
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script>
+    (function() {
+      emailjs.init("3ImyA9sZMlHLtN3aE"); // Reemplaza "YOUR_USER_ID" con tu ID de usuario de EmailJS
+    })();
+
+    function showSection(id) {
+      var sections = document.getElementsByClassName('section-content');
+      var menus = document.getElementsByClassName('menu')[0].getElementsByTagName('div');
+      for (var i = 0; i < sections.length; i++) {
+        sections[i].classList.remove('active');
+        menus[i].classList.remove('active');
+      }
+      document.getElementById(id).classList.add('active');
+      document.getElementById('menu' + id.replace('info', '')).classList.add('active');
+    }
+
+    function toggleContactForm() {
+      var overlay = document.getElementById('popup-overlay');
+      overlay.style.display = overlay.style.display === 'flex' ? 'none' : 'flex';
+    }
+
+    function sendEmail(event) {
+      event.preventDefault();
+      var email = document.getElementById('email').value;
+      var message = document.getElementById('message').value;
+
+      emailjs.send('service_23rkpbi', 'template_1abukbp', {
+        to_email: 'manifestouncensored@gmail.com',
+        from_email: email,
+        message: message
+      }).then(function(response) {
+        alert('Correo enviado con éxito!');
+        document.getElementById('contact-form').reset();
+        toggleContactForm();
+      }, function(error) {
+        alert('Error al enviar el correo. Inténtalo de nuevo.');
+      });
+    }
+  </script>
 </head>
 <body>
   <div class="container">
@@ -133,18 +247,20 @@
       <p>Community Building</p>
       <p>Resale & Transfer of Ownership</p>
     </div>
+    <button class="contact-button" onclick="toggleContactForm()">Contact Me</button>
   </div>
-  <script>
-    function showSection(id) {
-      var sections = document.getElementsByClassName('section-content');
-      var menus = document.getElementsByClassName('menu')[0].getElementsByTagName('div');
-      for (var i = 0; i < sections.length; i++) {
-        sections[i].classList.remove('active');
-        menus[i].classList.remove('active');
-      }
-      document.getElementById(id).classList.add('active');
-      document.getElementById('menu' + id.replace('info', '')).classList.add('active');
-    }
-  </script>
+
+  <div id="popup-overlay" class="popup-overlay">
+    <div class="popup">
+      <form id="contact-form" class="contact-form" onsubmit="sendEmail(event)">
+        <input type="email" id="email" placeholder="Your Email" required>
+        <textarea id="message" placeholder="Your Message" rows="4" required></textarea>
+        <div>
+          <button type="submit">Enviar</button>
+          <button type="button" class="cancel" onclick="toggleContactForm()">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </body>
 </html>
