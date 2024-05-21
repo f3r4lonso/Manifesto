@@ -42,6 +42,10 @@
       box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1); /* Sombra blanca tenue */
       background-color: #000000; /* Fondo negro */
     }
+    .logo {
+      max-width: 70px; /* Tamaño máximo del logo */
+      margin-bottom: 10px;
+    }
     .product-name {
       font-family: 'GraciaRough';
       font-size: 4em; /* Tamaño de fuente aumentado */
@@ -167,7 +171,7 @@
   <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
   <script>
     (function() {
-      emailjs.init("3ImyA9sZMlHLtN3aE"); // Reemplaza "YOUR_USER_ID" con tu ID de usuario de EmailJS
+      emailjs.init("YOUR_PUBLIC_KEY"); // Reemplaza "YOUR_PUBLIC_KEY" con tu clave pública de EmailJS
     })();
 
     function showSection(id) {
@@ -191,7 +195,7 @@
       var email = document.getElementById('email').value;
       var message = document.getElementById('message').value;
 
-      emailjs.send('service_23rkpbi', 'template_1abukbp', {
+      emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', {
         to_email: 'manifestouncensored@gmail.com',
         from_email: email,
         message: message
@@ -207,6 +211,7 @@
 </head>
 <body>
   <div class="container">
+    <img class="logo" src="logo/logo.jpeg" alt="Logo de la marca">
     <div class="product-name">Skirt With Secrets</div>
     <img class="image" src="images/skirt.gif" alt="Foto del item">
     <div class="menu">
