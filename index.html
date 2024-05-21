@@ -13,6 +13,10 @@
       font-family: 'CalistBold';
       src: url('fonts/CALISTB.TTF') format('truetype');
     }
+    @font-face {
+      font-family: 'GraciaRough';
+      src: url('fonts/GraciaASW01-No45Rough.otf') format('opentype');
+    }
 
     body {
       font-family: 'CalistRegular', 'Courier New', Courier, monospace;
@@ -22,21 +26,29 @@
       padding: 0;
       display: flex;
       justify-content: center;
-      align-items: center;
+      align-items: flex-start;
       height: 100vh;
     }
     .container {
+      margin-top: 20px; /* Margen superior añadido */
       width: 90%;
       max-width: 400px;
       border: 2px solid #000000;
       border-radius: 10px;
       padding: 20px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    .product-name {
+      font-family: 'GraciaRough';
+      font-size: 1.5em;
+      margin-bottom: 10px;
     }
     .section {
       border-bottom: 1px solid #000000;
       cursor: pointer;
       padding: 10px 0;
+      text-align: left;
     }
     .section h2 {
       margin: 0;
@@ -65,11 +77,11 @@
 </head>
 <body>
   <div class="container">
+    <div class="product-name">Skirt With Secrets</div>
     <img class="image" src="images/skirt.gif" alt="Foto del item">
     <div class="section" onclick="toggleInfo('info1')">
       <h2>Item</h2>
       <div id="info1" class="hidden-info">
-        <p><b>Skirt With Secrets</b></p>
         <p>Wear elegance without compromise privacy.</p>
         <p>Crafted with artisan techniques and luxurious sustainable materials: Ahimsa silk and recycled polyester.</p>
         <p>Cleverly hidden 10x10cm interior pocket.</p>
