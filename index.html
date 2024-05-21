@@ -98,17 +98,20 @@
       color: #000000; /* Texto negro */
       border-radius: 15px; /* Bordes redondeados */
       box-sizing: border-box; /* Incluir padding en el tamaño del contenedor */
-      height: auto; /* Altura automática */
+      height: 200px; /* Altura fija */
       overflow-wrap: break-word; /* Ajustar texto al contenedor */
       overflow: hidden; /* Evitar desbordamiento */
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+      display: flex;
+      flex-direction: column;
+      justify-content: center; /* Centrar verticalmente */
     }
     .section-content p {
       margin: 5px 0; /* Reducir margen superior e inferior de los párrafos */
       line-height: 1.2; /* Reducir distancia entre líneas */
     }
     .section-content.active {
-      display: block;
+      display: flex;
     }
     .image {
       display: block;
@@ -192,11 +195,17 @@
       var menus = document.getElementsByClassName('menu')[0].getElementsByTagName('div');
       for (var i = 0; i < sections.length; i++) {
         sections[i].classList.remove('active');
+        sections[i].style.display = 'none'; // Ocultar todas las secciones
         menus[i].classList.remove('active');
       }
       document.getElementById(id).classList.add('active');
+      document.getElementById(id).style.display = 'flex'; // Mostrar la sección activa
       document.getElementById('menu' + id.replace('info', '')).classList.add('active');
     }
+
+    document.addEventListener("DOMContentLoaded", function() {
+      showSection('info1'); // Preseleccionar la opción 1 al cargar la página
+    });
 
     function toggleContactForm() {
       var overlay = document.getElementById('popup-overlay');
@@ -235,7 +244,7 @@
       <div onclick="showSection('info5')" id="menu5">Digital Collectibles</div>
       <button class="contact-button" onclick="toggleContactForm()">Contact Me</button>
     </div>
-    <div class="section-content active" id="info1">
+    <div class="section-content" id="info1">
       <p>M-0001010</p>
       <p>Uploaded on the blockchain: 21/03/2024</p>
       <p>Blockchain transaction ID:</p>
