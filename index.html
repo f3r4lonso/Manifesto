@@ -3,264 +3,64 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Página Móvil</title>
-  <style>
-    @font-face {
-      font-family: 'CalistRegular';
-      src: url('fonts/CALIST.TTF') format('truetype');
-    }
-    @font-face {
-      font-family: 'CalistBold';
-      src: url('fonts/CALISTB.TTF') format('truetype');
-    }
-    @font-face {
-      font-family: 'GraciaRough';
-      src: url('fonts/GraciaASW01-No45Rough.otf') format('opentype');
-    }
-
-    body {
-      font-family: 'CalistRegular', 'Courier New', Courier, monospace;
-      background: linear-gradient(180deg, #000000, #333333, #ffffff); /* Fondo degradado de negro a blanco */
-      color: #ffffff; /* Texto blanco */
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-      overflow-y: auto; /* Habilitar scroll vertical */
-    }
-    .logo {
-      max-width: 70px; /* Tamaño máximo del logo */
-      margin: 10px 0; /* Reducir espacio entre el logo y el nombre del producto */
-    }
-    .product-name {
-      font-family: 'GraciaRough';
-      font-size: 2em; /* Tamaño de fuente ajustado para dispositivos móviles */
-      margin: 5px 0; /* Reducir espacio entre el logo y el nombre del producto */
-      line-height: 1.2;
-      text-align: center;
-      color: #c0c0c0; /* Color plateado */
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra de texto */
-    }
-    .image {
-      display: block;
-      max-width: 100%; /* Ajustar el ancho de la imagen para móviles */
-      height: auto;
-      border-radius: 15px; /* Bordes redondeados */
-      box-shadow: 0 4px 8px rgba(192, 192, 192, 0.2), 0 6px 20px rgba(192, 192, 192, 0.19); /* Sombra plateada */
-      margin-bottom: 20px;
-    }
-    .menu {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr); /* Dos columnas */
-      gap: 10px; /* Espacio entre los botones */
-      width: 90%;
-      max-width: 400px;
-      margin-bottom: 20px;
-    }
-    .menu div,
-    .menu button {
-      cursor: pointer;
-      padding: 10px; /* Ajustar padding para el tamaño del botón */
-      font-family: 'CalistBold', Monaco, monospace;
-      font-size: 1em; /* Ajustar tamaño de fuente para el botón */
-      text-align: center; /* Centrar el texto */
-      border-radius: 10px; /* Bordes redondeados */
-      box-sizing: border-box; /* Asegurar que el padding esté incluido en el tamaño del botón */
-      border: 2px solid #c0c0c0; /* Borde plateado */
-      background: linear-gradient(145deg, #000000, #333333); /* Fondo degradado negro a gris */
-      color: #ffffff;
-      transition: all 0.3s ease; /* Transición suave para el hover */
-    }
-    .menu div:hover,
-    .menu button:hover {
-      background: #c0c0c0; /* Fondo plateado al pasar el mouse */
-      color: #000000; /* Texto negro al pasar el mouse */
-      box-shadow: 0 4px 8px rgba(192, 192, 192, 0.5); /* Sombra plateada al pasar el mouse */
-    }
-    .menu div.active {
-      background: #c0c0c0; /* Fondo plateado para el activo */
-      color: #000000; /* Texto negro para el activo */
-    }
-    .section-content {
-      display: none;
-      padding: 10px 20px; /* Ajustar padding para reducir margen superior */
-      text-align: center; /* Centrar el texto */
-      width: 90%;
-      max-width: 400px;
-      background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco semi-transparente */
-      color: #000000; /* Texto negro */
-      border-radius: 15px; /* Bordes redondeados */
-      box-sizing: border-box; /* Incluir padding en el tamaño del contenedor */
-      height: 200px; /* Altura fija */
-      overflow-wrap: break-word; /* Ajustar texto al contenedor */
-      overflow: hidden; /* Evitar desbordamiento */
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
-      display: flex;
-      flex-direction: column;
-      justify-content: center; /* Centrar verticalmente */
-      margin-bottom: 20px; /* Espacio entre el contenido y el siguiente elemento */
-    }
-    .section-content p {
-      margin: 5px 0; /* Reducir margen superior e inferior de los párrafos */
-      line-height: 1.2; /* Reducir distancia entre líneas */
-    }
-    .section-content.active {
-      display: flex;
-    }
-    .popup-overlay {
-      display: none; /* Oculto por defecto */
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro semi-transparente */
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
-    .popup {
-      background-color: rgba(255, 255, 255, 0.9);
-      color: #000000;
-      padding: 20px;
-      border-radius: 15px;
-      box-sizing: border-box;
-      width: 90%;
-      max-width: 400px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    }
-    .popup input, .popup textarea {
-      margin-bottom: 10px;
-      padding: 10px;
-      border: 1px solid #000000;
-      border-radius: 5px;
-      width: 100%;
-      box-sizing: border-box;
-    }
-    .popup button {
-      background-color: #000000;
-      color: #ffffff;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 1em;
-      margin: 5px;
-      transition: all 0.3s ease; /* Transición suave para el hover */
-    }
-    .popup button:hover {
-      background-color: #c0c0c0; /* Fondo plateado al pasar el mouse */
-      color: #000000; /* Texto negro al pasar el mouse */
-    }
-    .popup button.cancel {
-      background-color: #ff0000; /* Rojo para el botón de cancelar */
-    }
-  </style>
+  <title id="pageTitle"></title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="localizations/resources_en.js"></script>
+  <script src="localizations/resources_es.js"></script>
+  <script src="localizations/resources_fr.js"></script>
+  <script src="localizations/resources_de.js"></script>
+  <script src="localizations/resources_ca.js"></script>
+  <script src="localizations/resources_ru.js"></script>
+  <script src="localizations/resources_ja.js"></script>
+  <script src="localizations/resources_ko.js"></script>
   <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-  <script>
-    (function() {
-      emailjs.init("3ImyA9sZMlHLtN3aE"); // Reemplaza "YOUR_PUBLIC_KEY" con tu clave pública de EmailJS
-    })();
-
-    function showSection(id) {
-      var sections = document.getElementsByClassName('section-content');
-      var menus = document.getElementsByClassName('menu')[0].getElementsByTagName('div');
-      for (var i = 0; i < sections.length; i++) {
-        sections[i].classList.remove('active');
-        sections[i].style.display = 'none'; // Ocultar todas las secciones
-        menus[i].classList.remove('active');
-      }
-      document.getElementById(id).classList.add('active');
-      document.getElementById(id).style.display = 'flex'; // Mostrar la sección activa
-      document.getElementById('menu' + id.replace('info', '')).classList.add('active');
-    }
-
-    document.addEventListener("DOMContentLoaded", function() {
-      showSection('info1'); // Preseleccionar la opción 1 al cargar la página
-    });
-
-    function toggleContactForm() {
-      var overlay = document.getElementById('popup-overlay');
-      overlay.style.display = overlay.style.display === 'flex' ? 'none' : 'flex';
-    }
-
-    function sendEmail(event) {
-      event.preventDefault();
-      var email = document.getElementById('email').value;
-      var message = document.getElementById('message').value;
-
-      emailjs.send('service_23rkpbi', 'template_1abukbp', {
-        to_email: 'manifestouncensored@gmail.com',
-        from_email: email,
-        message: message
-      }).then(function(response) {
-        alert('Correo enviado con éxito!');
-        document.getElementById('contact-form').reset();
-        toggleContactForm();
-      }, function(error) {
-        alert('Error al enviar el correo. Inténtalo de nuevo.');
-      });
-    }
-  </script>
+  <script defer src="script.js"></script>
 </head>
 <body>
-  <img class="logo" src="logo/logo.jpeg" alt="Logo de la marca">
-  <div class="product-name">Skirt With Secrets</div>
-  <img class="image" src="images/skirt.gif" alt="Foto del item">
+  <div id="welcome-popup" class="popup-overlay" style="display: flex;">
+    <div class="popup">
+      <h2 id="welcome-message">Welcome to ManifestoHighTechWear</h2>
+      <p>Please select your language</p>
+      <div class="language-select">
+        <select id="language-select">
+          <option value="en">🇬🇧 English</option>
+          <option value="es">🇪🇸 Español</option>
+          <option value="fr">🇫🇷 Français</option>
+          <option value="de">🇩🇪 Deutsch</option>
+          <option value="ca">🇪🇸 Català</option>
+          <option value="ru">🇷🇺 Русский</option>
+          <option value="ja">🇯🇵 日本語</option>
+          <option value="ko">🇰🇷 한국어</option>
+        </select>
+      </div>
+      <button id="confirm-language-button" onclick="closeWelcomePopup()">Confirm</button>
+    </div>
+  </div>
+
+  <img class="logo" src="logo/logo.jpeg" alt="">
+  <div class="product-name"></div>
+  <img class="image" src="images/skirt.gif" alt="">
   <div class="menu">
-    <div onclick="showSection('info1')" id="menu1" class="active">Product code</div>
-    <div onclick="showSection('info2')" id="menu2">Materials</div>
-    <div onclick="showSection('info3')" id="menu3">Care instructions</div>
-    <div onclick="showSection('info4')" id="menu4">Product journey</div>
-    <div onclick="showSection('info5')" id="menu5">Digital Collectibles</div>
-    <button class="contact-button" onclick="toggleContactForm()">Contact Me</button>
+    <div onclick="showSection('info1')" id="menu1" class="active"></div>
+    <div onclick="showSection('info2')" id="menu2"></div>
+    <div onclick="showSection('info3')" id="menu3"></div>
+    <div onclick="showSection('info4')" id="menu4"></div>
+    <div onclick="showSection('info5')" id="menu5"></div>
+    <button class="contact-button" onclick="toggleContactForm()"></button>
   </div>
-  <div class="section-content" id="info1">
-    <p>M-0001010</p>
-    <p>Uploaded on the blockchain: 21/03/2024</p>
-    <p>Blockchain transaction ID:</p>
-    <p class="right-align">44e25bc0ed840f9bf0e58d6227db15192d5b89e79ba4304da16b09703f68ceaf</p>
-  </div>
-  <div class="section-content" id="info2">
-    <p>Fabric: 80% Ahimsa Silk, 20% Polyester.</p>
-    <p>Lining: 100% Ahimsa Silk.</p>
-  </div>
-  <div class="section-content" id="info3">
-    <p>Do Not Wash</p>
-    <p>Do Not Bleach</p>
-    <p>Iron Max 110ºC</p>
-    <p>Do Not Tumble Dry</p>
-    <p>Dry Clean with Tetracloroethylene</p>
-  </div>
-  <div class="section-content" id="info4">
-    <p>Step 1. Origin of textiles</p>
-    <p>Step 2. Textile Interventions</p>
-    <p>Step 3. Tailoring</p>
-    <p>Step 4. Quality control</p>
-    <p>Step 5. Labeling and packaging</p>
-  </div>
-  <div class="section-content" id="info5">
-    <p>Authenticity</p>
-    <p>Transparency</p>
-    <p>Waste Management</p>
-    <p>Community Building</p>
-    <p>Resale & Transfer of Ownership</p>
-  </div>
+  <div class="section-content" id="info1"></div>
+  <div class="section-content" id="info2"></div>
+  <div class="section-content" id="info3"></div>
+  <div class="section-content" id="info4"></div>
+  <div class="section-content" id="info5"></div>
 
   <div id="popup-overlay" class="popup-overlay">
     <div class="popup">
       <form id="contact-form" class="contact-form" onsubmit="sendEmail(event)">
-        <input type="email" id="email" placeholder="Your Email" required>
-        <textarea id="message" placeholder="Your Message" rows="4" required></textarea>
+        <input type="email" id="email" placeholder="" required>
+        <textarea id="message" placeholder="" rows="4" required></textarea>
         <div>
-          <button type="submit">Enviar</button>
+          <button type="submit"></button>
           <button type="button" class="cancel" onclick="toggleContactForm()">Cancelar</button>
         </div>
       </form>
